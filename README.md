@@ -9,7 +9,7 @@ A minimalistic node.js client for [StatsD] server. Fork of original work by [siv
 * **Re-usable UDP Connections** – Keeps UDP connections open for a certain time
 * **Errors** - Pluggable error handling, by default errors are ignored
 
-## Getting Started
+## Quick Start
 
 ```
 $ npm install lynx
@@ -20,6 +20,14 @@ $ node
 > c.increment('node_test.int')
 > c.decrement('node_test.int')
 > c.timing('node_test.some_service.task.time', 500) // time in millis
+```
+
+This is the equivalent to 
+
+``` sh
+echo "node_test.int:1|c" | nc -w 0 -u localhost 8125
+echo "node_test.int:-1|c" | nc -w 0 -u localhost 8125
+echo "node_test.some_service.task.time:500|ms" | nc -w 0 -u localhost 8125
 ```
 
 ## tests

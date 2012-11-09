@@ -11,7 +11,15 @@
 , "directories" : { "lib" : "./lib/" }
 , "main"        : "./lib/lynx"
 , "keywords"        : 
-  ["stats", "metrics", "metricsd", "statsd", "etsy", "statsd client", "statsd driver", "graphite"]
+  [ "stats"
+  , "metrics"
+  , "metricsd"
+  , "statsd"
+  , "etsy"
+  , "statsd client"
+  , "statsd driver"
+  , "graphite"
+  ]
 , "licenses"    :
   [ { "type"    : "MIT"
     , "url"     : "http://github.com/dscape/lynx/raw/master/LICENSE"

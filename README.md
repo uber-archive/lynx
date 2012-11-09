@@ -11,6 +11,7 @@ A minimalistic node.js client for [StatsD] server. Fork of original work by [siv
 
 ## Getting Started
 
+```
 $ npm install lynx
 $ node
 > var lynx = require('lynx')
@@ -19,6 +20,7 @@ $ node
 > c.increment('node_test.int')
 > c.decrement('node_test.int')
 > c.timing('node_test.some_service.task.time', 500) // time in millis
+```
 
 ## tests
 

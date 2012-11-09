@@ -14,18 +14,18 @@ A minimalistic node.js client for [StatsD] server. Fork of original work by [siv
 ```
 $ npm install lynx
 $ node
-> var lynx = require('lynx')
-> c = new lynx('localhost',8125)
+> var lynx = require('lynx');
+> var metrics = new lynx('localhost', 8125);
 { host: 'localhost', port: 8125 }
-> c.increment('node_test.int')
-> c.decrement('node_test.int')
-> c.timing('node_test.some_service.task.time', 500) // time in millis
+> metrics.increment('node_test.int');
+> metrics.decrement('node_test.int');
+> metrics.timing('node_test.some_service.task.time', 500); // time in millis
 ```
 
 This is the equivalent to 
 
 ``` sh
-echo "node_test.int:1|c" | nc -w 0 -u localhost 8125
+echo "node_test.int:1|c"  | nc -w 0 -u localhost 8125
 echo "node_test.int:-1|c" | nc -w 0 -u localhost 8125
 echo "node_test.some_service.task.time:500|ms" | nc -w 0 -u localhost 8125
 ```

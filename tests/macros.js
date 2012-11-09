@@ -14,20 +14,11 @@ macros.udpServerPort = 9753;
 //      the respective fixture
 // #### @onTest   {Function} Function that returns the result of a specific
 //      test
-// #### @timeout  {Number} Time after which we close the server
 //
 // Start a `udp` server that will expect a certain order of events that is
 // mocked in `fixtures`
 //
-macros.udpServer = function udpServer(testName, timeout, onTest) {
-  //
-  // JavaScript how much we <3 you
-  //
-  if(typeof timeout === "function") {
-    onTest  = timeout;
-    timeout = null;
-  }
-
+macros.udpServer = function udpServer(testName, onTest) {
   //
   // Set the path for the fixture we want to load
   //
@@ -40,9 +31,21 @@ macros.udpServer = function udpServer(testName, timeout, onTest) {
   var fixture = require("./" + fixturePath);
 
   //
+  // The number of requests we expect to get
+  //
+  var nrRequests = fixture.length
+    , iRequests  = 0
+    ;
+
+  //
   // Create a UDP Socket
   //
   var socket = dgram.createSocket("udp4", function (message, remote) {
+    //
+    // We got another one
+    //
+    iRequests++;
+
     //
     // We expect the first item in our fixture
     //
@@ -56,15 +59,18 @@ macros.udpServer = function udpServer(testName, timeout, onTest) {
     //
     var actual  = message.toString('ascii', 0, remote.size);
 
+    //
+    // Return our test results
+    //
     onTest(actual === expected, { expected: expected, actual: actual });
-  });
 
-  //
-  // If we have set a timeout close the socket after that amount of ms
-  //
-  if (typeof timeout === "number") {
-    setTimeout(socket.close, timeout);
-  }
+    //
+    // If we are done close the server
+    //
+    if(iRequests === nrRequests) {
+      socket.close();
+    }
+  });
 
   //
   // Listen in some (not so) random port

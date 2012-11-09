@@ -1,20 +1,20 @@
-{ "name" : "node-statsd"
-, "description" : "node client for Etsy'd StatsD server"
-, "version" : "0.0.2"
-, "author" : "Steve Ivy"
-, "repository" :
-  { "type" : "git"
-  , "url" : "git://github.com/sivy/node-statsd.git"
+{ "name"        : "lynx"
+, "description" : "Minimalistic StatsD client for Node.js programs"
+, "version"     : "0.0.0"
+, "author"      : "Lloyd Hilaiel"
+, "contributors": [ "Nuno Job <nunojobpinto@gmail.com> (http://nunojob.com)" ]
+, "repository"  :
+  { "type"      : "git"
+  , "url"       : "git://github.com/dscape/lynx.git"
   }
-, "bugs" : { "web" : "https://github.com/sivy/node-statsd/issues" }
-, "os" : [ "linux", "darwin", "freebsd" ]
+, "bugs"        : { "web" : "https://github.com/dscape/lynx/issues" }
 , "directories" : { "lib" : "./lib/" }
-, "main" : "./lib/statsd"
-, "engines" : { "node" : ">=0.1.97" }
-, "dependencies" : { "mersenne" : "*" }
-, "licenses" :
-  [ { "type" : "MIT"
-    , "url" : "http://github.com/sivy/node-stats/raw/master/LICENSE"
-    }   
+, "main"        : "./lib/lynx"
+, "keywords"        : 
+  ["stats", "metrics", "metricsd", "statsd", "etsy", "statsd client", "statsd driver", "graphite"]
+, "licenses"    :
+  [ { "type"    : "MIT"
+    , "url"     : "http://github.com/dscape/lynx/raw/master/LICENSE"
+    }
   ]
 }

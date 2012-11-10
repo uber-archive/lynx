@@ -90,7 +90,7 @@ macros.udpFixturesServer = function udpServer(testName, onTest) {
     // `remote.size` for data lenght
     // `message.toString('ascii', 0, remote.size)` for textual contents
     //
-    var actual  = message.toString('ascii', 0, remote.size);
+    var actual  = macros.parseMessage(message, remote.size);
 
     //
     // Return our test results
@@ -218,6 +218,16 @@ macros.matchFixturesTest = function genericTest(resource, f) {
 };
 
 //
+// ### function parseMessage(testName, onTest)
+// #### @message {String} Message to decode
+//
+// Start a `udp` server.
+//
+macros.parseMessage = function parseMessage(message, size) {
+  return message.toString('ascii', 0, size);
+};
+
+//
 // Export simple `tap` tests
 //
 macros.test = test;
@@ -226,3 +236,8 @@ macros.test = test;
 // Export `lynx`
 //
 macros.lynx = lynx;
+
+//
+// Export MAX_APROX_ERROR
+//
+macros.MAX_APROX_ERROR = MAX_APROX_ERROR;

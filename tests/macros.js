@@ -108,7 +108,19 @@ macros.udpServer = function udpServer(testName, onTest) {
 // 2.2. Runs client code that should match what has been mocked
 //
 macros.matchFixturesTest = function genericTest(resource, f) {
-  var nrTests = require('./fixtures/' + resource).length;
+  var currentFixture = require('./fixtures/' + resource)
+    , nrTests = currentFixture.length
+    ;
+
+  //
+  // Correct `nrTests`. Each aproximation test (contains `~`) does two
+  // assertions
+  //
+  currentFixture.forEach(function (value) {
+    if(value.indexOf("~") !== -1) {
+      nrTests++;
+    }
+  });
 
   //
   // All of our counting tests
@@ -116,6 +128,7 @@ macros.matchFixturesTest = function genericTest(resource, f) {
   test(resource + " test", function (t) {
     //
     // Plan for as many tests as we have fixtures
+    // Double for `~` (aproximation) tests.
     // 
     t.plan(nrTests);
 
@@ -128,35 +141,46 @@ macros.matchFixturesTest = function genericTest(resource, f) {
       // Aproximation
       //
       if(info.expected.indexOf("~") !== -1) {
-        console.log("A", info)
         //
         // foobar : ~ 10     |ms
         // /(.*)? : ~ (.*)? \|ms/
         //
         // ? means non eager, like don't eat multiple `:`.
         //
-        var match = /(.*)?:~(.*)?\|ms/.exec(info.expected);
-        if(match && typeof match[2] === "string") {
+        var matchE = /(.*)?:~(.*)?\|ms/.exec(info.expected)
+            //
+            // Actual doesnt have `~`
+            //
+          , matchA = /(.*)?:(.*)?\|ms/.exec(info.actual)
+          ;
+        
+        //
+        // If we were able to extract values from both
+        //
+        if(matchE && typeof matchE[2] === "string" &&
+           matchA && typeof matchA[2] === "string") {
           //
           // Get our aproximate number
           //
-          var aproximation = parseInt(match[2], 10);
+          var aproximation = parseInt(matchE[2], 10)
+            , valueA       = parseInt(matchA[2], 10)
+            ;
 
           //
           // Our upper bound
           //
           var ubound = aproximation + (aproximation * MAX_APROX_ERROR / 100);
 
-          t.ok(ubound >= aproximation, "value deviated from " + aproximation +
-           "by more than +" + MAX_APROX_ERROR + "%.");
+          t.ok(ubound >= valueA, "value deviated from " + aproximation +
+           " by more than +" + MAX_APROX_ERROR + "%. [" + valueA + "]");
 
           //
           // Our lower bound
           //
           var lbound = aproximation - (aproximation * MAX_APROX_ERROR / 100);
 
-          t.ok(lbound <= aproximation, "value deviated from " + aproximation +
-            "by more than -" + MAX_APROX_ERROR + "%.");
+          t.ok(lbound <= valueA, "value deviated from " + aproximation +
+            " by more than -" + MAX_APROX_ERROR + "%. [" + valueA + "]");
         }
         else {
           //
@@ -170,7 +194,6 @@ macros.matchFixturesTest = function genericTest(resource, f) {
       // On each response check if they are identical
       //
       else {
-        console.log("AB")
         t.equal(info.expected, info.actual);
       }
     });

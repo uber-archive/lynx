@@ -19,7 +19,7 @@ $ node
 { host: 'localhost', port: 8125 }
 > metrics.increment('node_test.int');
 > metrics.decrement('node_test.int');
-> metrics.timing('node_test.some_service.task.time', 500); // time in millis
+> metrics.timing('node_test.some_service.task.time', 500); // time in ms
 ```
 
 This is the equivalent to 

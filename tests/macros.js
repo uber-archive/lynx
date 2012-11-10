@@ -25,7 +25,24 @@ macros.udpServerPort = 9753;
 macros.connection = new lynx('localhost', macros.udpServerPort);
 
 //
-// ### function mockUdpServer(testName, onTest)
+// ### function udpServer(testName, onTest)
+// #### @onMessage {Function} Function to be run on each message
+//
+// Start a `udp` server.
+//
+macros.updServer = function udpServer(onMessage) {
+  var socket = dgram.createSocket("udp4", onMessage);
+
+  //
+  // Listen in some (not so) random port
+  //
+  socket.bind(macros.udpServerPort, 'localhost');
+
+  return socket;
+};
+
+//
+// ### function udpFixturesServer(testName, onTest)
 // #### @testName {String} The test that is calling this, so we can load
 //      the respective fixture
 // #### @onTest   {Function} Function that returns the result of a specific
@@ -34,7 +51,7 @@ macros.connection = new lynx('localhost', macros.udpServerPort);
 // Start a `udp` server that will expect a certain order of events that is
 // mocked in `fixtures`
 //
-macros.udpServer = function udpServer(testName, onTest) {
+macros.udpFixturesServer = function udpServer(testName, onTest) {
   //
   // Set the path for the fixture we want to load
   //
@@ -56,7 +73,7 @@ macros.udpServer = function udpServer(testName, onTest) {
   //
   // Create a UDP Socket
   //
-  var socket = dgram.createSocket("udp4", function (message, remote) {
+  var socket = macros.updServer(function (message, remote) {
     //
     // We got another one
     //
@@ -87,11 +104,6 @@ macros.udpServer = function udpServer(testName, onTest) {
       socket.close();
     }
   });
-
-  //
-  // Listen in some (not so) random port
-  //
-  socket.bind(macros.udpServerPort, 'localhost');
 };
 
 //
@@ -135,7 +147,7 @@ macros.matchFixturesTest = function genericTest(resource, f) {
     //
     // Setup our server
     //
-    macros.udpServer(resource, function onEachRequest(err, info) {
+    macros.udpFixturesServer(resource, function onEachRequest(err, info) {
 
       //
       // Aproximation
@@ -209,3 +221,8 @@ macros.matchFixturesTest = function genericTest(resource, f) {
 // Export simple `tap` tests
 //
 macros.test = test;
+
+//
+// Export `lynx`
+//
+macros.lynx = lynx;

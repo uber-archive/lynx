@@ -1,0 +1,4 @@
+[ "foo.baz.time:10|ms"
+, "foo.bar.time:500|ms"
+, "foo.interval:~100|ms"
+]

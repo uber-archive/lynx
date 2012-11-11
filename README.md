@@ -120,6 +120,7 @@ npm test
            ` )/`--'\(`'  atc
              `      '
 
+* travis: [![build status](https://secure.travis-ci.org/dscape/lynx.png)](http://travis-ci.org/dscape/lynx)
 * code: `git clone git://github.com/dscape/lynx.git`
 * home: <http://github.com/dscape/lynx>
 * bugs: <http://github.com/dscape/lynx/issues>

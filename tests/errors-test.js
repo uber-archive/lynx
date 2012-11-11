@@ -18,7 +18,7 @@ test('errors', function (t) {
     //
     // Message should match fixture
     //
-    t.equal(actual.message, expected);
+    t.equal(expected, actual.message);
 
     //
     // No more tests to run

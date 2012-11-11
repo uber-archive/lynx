@@ -1,6 +1,6 @@
 # lynx
 
-A minimalistic node.js client for [StatsD] server. Fork of original work by [sivy]
+A minimalistic node.js client for [statsd] server. Fork of original work by [sivy]
 
 `lynx` features:
 
@@ -62,4 +62,4 @@ npm test
 
 [caos]: http://caos.di.uminho.pt
 [sivy]: https://github.com/sivy/node-statsd
-[StatsD]: https://github.com/etsy/statsd
+[statsd]: https://github.com/etsy/statsd

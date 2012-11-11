@@ -13,9 +13,9 @@ Everyone is welcome to contribute with patches, bug-fixes and new features
 
 ## Tests
 
-Tests are written in `node-tap`. If you want to create a new test create a file named `myTestName-test.js` under the `tests` directory and it will be automatically picked up by `tap`. Before you do that however please check if a test doesn't already exist.
+Tests are written in `node-tap`. If you want to create a new test create a file named `my-test-name-test.js` under the `tests` directory and it will be automatically picked up by `tap`. Before you do that however please check if a test doesn't already exist.
 
-Tests run against a udp ""server"", which is on `tests/macros.js`. If your test name is `fooBar` this helper function will read a fixtures located in `tests/fixtures/fooBar.json`.
+Tests run against a udp ""server"", which is on `tests/macros.js`. If your test name is `foo-bar` this helper function will read a fixtures located in `tests/fixtures/foo-bar.json`.
 
 Each fixture is an array containing strings, the strings that we expect the client to send when we issue certain commands.
 

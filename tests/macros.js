@@ -96,7 +96,7 @@ macros.udpFixturesServer = function udpServer(testName, onTest) {
     // Return our test results
     //
     onTest(actual === expected, { expected: expected, actual: actual });
-
+console.log("&&&", actual, "%%%", expected, iRequests + "/" + nrRequests);
     //
     // If we are done close the server
     //

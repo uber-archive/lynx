@@ -1,4 +1,5 @@
 var macros     = require('./macros')
+  , lynx       = macros.lynx
   , test       = macros.test
   , updServer  = macros.updServer
   , connection = macros.connection
@@ -26,11 +27,11 @@ for(i=0; i<TOTAL; i++) {
 }
 
 //
-// We are going to do one thousand packets
+// We are going to do one thousand `TOTAL` packets
 // and see if we hit our minimums
 //
 // When you specify sampling `lynx` must track that it only send the amount
-// of packages you are specifying (e.g. 1 in each 10 for @0.1)
+// of packages you are specifying (e.g. 1 in each 10 for @0.1 as in `SAMPLE`)
 //
 // To do this we use random numbers, making our process not perfect but
 // accurate enough
@@ -41,22 +42,16 @@ for(i=0; i<TOTAL; i++) {
 //
 test("sampling", function (t) {
   var server = updServer(function (message, remote) {
-    //
-    // do nothing if finished
-    //
-    if(finished) {
-      return;
-    }
-
     count++;
 
     //
-    // We have hit our minimums
+    // When we finally hit our lower threshold
     //
     if(count > DESIRED) {
       finished = true;
-      t.ok(true, "Reached " + DESIRED + " on " + (TOTAL - coll.length) + " packets.");
-      t.end();
+      t.ok(true, "Reached " + DESIRED + " on " + (TOTAL - coll.length) + 
+        " packets.");
+      server.close();
     }
   });
 
@@ -80,6 +75,11 @@ test("sampling", function (t) {
   };
 
   runAll(coll, function() {
+    if (finished) {
+      t.ok(true, "Reached " + DESIRED + " on " + TOTAL + " packets.");
+      t.end();
+      return;
+    }
     //
     // If we reached the end and this has not closed by having
     // the desired amount of requests
@@ -90,3 +90,7 @@ test("sampling", function (t) {
     t.end();
   });
 });
+
+//
+// TODO: Sampling with irregular batches
+//

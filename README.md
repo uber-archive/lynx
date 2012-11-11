@@ -30,6 +30,12 @@ echo "node_test.int:-1|c" | nc -w 0 -u localhost 8125
 echo "node_test.some_service.task.time:500|ms" | nc -w 0 -u localhost 8125
 ```
 
+## API
+
+## Advanced
+
+Setting on error function
+
 ## tests
 
 Run the tests with `npm`.

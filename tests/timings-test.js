@@ -14,7 +14,7 @@ macros.matchFixturesTest('timings', function runTest(connection) {
   //
   // Constructing a timer object
   //
-  var timer = connection.Timer("foo.interval");
+  var timer = connection.Timer('foo.interval');
   
   //
   // Wait 100ms

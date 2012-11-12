@@ -1,7 +1,7 @@
 var macros     = require('./macros')
   , lynx       = macros.lynx
   , test       = macros.test
-  , updServer  = macros.updServer
+  , udpServer  = macros.udpServer
   , connection = macros.connection
   , count      = 0
   , finished   = false
@@ -41,7 +41,7 @@ for(i=0; i<TOTAL; i++) {
 // perfectly fine
 //
 test("sampling", function (t) {
-  var server = updServer(function (message, remote) {
+  var server = udpServer(function (message, remote) {
     count++;
 
     //

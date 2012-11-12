@@ -2,10 +2,13 @@ var Stream       = require('stream')
   , macros       = require('./macros')
   , lynx         = macros.lynx
   , port         = macros.udpServerPort
+  , udpServer    = macros.udpServer
   , test         = macros.test
   , fixture_send = require("./fixtures/stream-send.json")
   , fixture_recv = require("./fixtures/stream-recv.json")
   ;
+
+var server = udpServer(function () {});
 
 //
 // ### function createDelayedStream()
@@ -25,7 +28,6 @@ function createDelayedStream() {
   //
   var interval = setInterval(function () {
     var current = fixture_send.shift();
-    
     if(current) {
       //
       // Emit the current stream
@@ -62,7 +64,10 @@ function createTestStream(t) {
   //
   test_stream.write = function (buf) {
     var expected = fixture_recv.shift();
-    t.equal(expected, buf);
+    t.equal(expected, buf.toString(), "===" + expected);
+    if(fixture_recv.length === 0) {
+      test_stream.end();
+    }
   };
 
   //
@@ -70,10 +75,16 @@ function createTestStream(t) {
   // And we should end our tests here
   //
   //
-  test_stream.end = function (buf) {
+  test_stream.end = function end(buf) {
+
     if (arguments.length) {
       test_stream.write(buf);
     }
+
+    //
+    // Close our server socket
+    //
+    server.close();
 
     //
     // End our little experiment
@@ -93,8 +104,27 @@ function createTestStream(t) {
 }
 
 test('streams', function (t) {
+  //
+  // ### function onError(err)
+  // #### @err {Error} Error object
+  //
+  // Assertion to run if we get any errors
+  //
+  function onError(err) {
+    t.equal({}, err, "didn't expect any errors");
+    //
+    // End early
+    //
+    t.end();
+  }
+
+  //
+  // Our connection
+  //
+  var conn = new lynx('localhost', port, {onError: onError});
+
   createDelayedStream()
-    .pipe(new lynx('locahost', port))
+    .pipe(conn)
     .pipe(createTestStream(t))
     ;
 });

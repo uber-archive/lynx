@@ -30,7 +30,7 @@ macros.connection = new lynx('localhost', macros.udpServerPort);
 //
 // Start a `udp` server.
 //
-macros.updServer = function udpServer(onMessage) {
+macros.udpServer = function udpServer(onMessage) {
   var socket = dgram.createSocket('udp4', onMessage);
 
   //
@@ -73,7 +73,7 @@ macros.udpFixturesServer = function udpServer(testName, t, onTest) {
   //
   // Create a UDP Socket
   //
-  var socket = macros.updServer(function (message, remote) {
+  var socket = macros.udpServer(function (message, remote) {
     //
     // We got another one
     //

@@ -17,7 +17,7 @@ macros.matchFixturesTest('timings', function runTest(connection) {
   var timer = connection.createTimer('foo.interval');
 
   //
-  // Wait 100ms
+  // Wait 200ms
   //
   setTimeout(function () {
     //
@@ -28,6 +28,8 @@ macros.matchFixturesTest('timings', function runTest(connection) {
 
   //
   // A second timer
+  //
+  // Wait 100ms
   //
   var second_timer = connection.createTimer('bar.comes.first');
 
@@ -42,6 +44,8 @@ macros.matchFixturesTest('timings', function runTest(connection) {
   // Attempts to stop the timer again but before `foo.interval`
   // If someone breaks the `only stop once code` this will cause an error
   // because it will emit before the `foo.interval` and it wont be equal
+  //
+  // Wait 150ms
   //
   setTimeout(function () {
     //

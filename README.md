@@ -57,7 +57,7 @@ If you wish to measure timing you can use the `timer()` functionality.
 
 ``` js
 var metrics = new lynx('localhost', 8125)
-  , timer   = metrics.Timer('some.interval')
+  , timer   = metrics.createTimer('some.interval')
   ;
 
 //

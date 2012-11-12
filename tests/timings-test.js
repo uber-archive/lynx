@@ -14,8 +14,8 @@ macros.matchFixturesTest('timings', function runTest(connection) {
   //
   // Constructing a timer object
   //
-  var timer = connection.Timer('foo.interval');
-  
+  var timer = connection.createTimer('foo.interval');
+
   //
   // Wait 100ms
   //
@@ -24,5 +24,17 @@ macros.matchFixturesTest('timings', function runTest(connection) {
     // Stop the timer
     //
     timer.stop();
+  }, 200);
+
+  //
+  // A second timer
+  //
+  var second_timer = connection.createTimer('bar.comes.first');
+
+  setTimeout(function () {
+    //
+    // Stop the timer
+    //
+    second_timer.stop();
   }, 100);
 });

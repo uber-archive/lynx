@@ -44,9 +44,9 @@ The protocol is super simple, so feel free to check out the source code to under
 You can stream to `lynx`:
 
 ``` js
-createDelayedStream()
+fs.createReadStream('file.statsd')
   .pipe(new lynx('localhost', port))
-  .pipe(createTestStream(t))
+  .pipe(fs.createReadStream('file-fixed.statsd'))
   ;
 ```
 
@@ -94,7 +94,6 @@ metrics.send(
   , "bar" : "15|g"    // gauge
   , "baz" : "500|ms"  // timing
   , "boaz": "40|s"    // set
-  , ""
   }, 0.1);            // sample rate at `0.1`
 ```
 
@@ -104,14 +103,14 @@ You can close your open socket when you no longer need it by using `metrics.clos
 
 ### Errors
 
-By default `errors` get logged. If you wish to change this behavior simply specify a `onError` function when instantiating the `lynx` client.
+By default `errors` get logged. If you wish to change this behavior simply specify a `on_error` function when instantiating the `lynx` client.
 
 ``` js
-function onError(err) {
+function on_error(err) {
   console.log(err.message);
 }
 
-var connection = new lynx('localhost', 1234, {onError: onError});
+var connection = new lynx('localhost', 1234, {on_error: on_error});
 ```
 
 Source code is super minimal, if you want try to get familiar with when errors occur check it out. If you would like to change behavior on how this is handled send a pull request justifying why and including the alterations you would like to propose.

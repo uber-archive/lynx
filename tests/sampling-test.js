@@ -40,7 +40,7 @@ for(i=0; i<TOTAL; i++) {
 // this can never be an exact test and might break while the code is
 // perfectly fine
 //
-test("sampling", function (t) {
+test('sampling', function (t) {
   var server = udpServer(function (message, remote) {
     count++;
 
@@ -49,8 +49,8 @@ test("sampling", function (t) {
     //
     if(count > DESIRED) {
       finished = true;
-      t.ok(true, "Reached " + DESIRED + " on " + (TOTAL - coll.length) + 
-        " packets.");
+      t.ok(true, 'Reached ' + DESIRED + ' on ' + (TOTAL - coll.length) + 
+        ' packets.');
       server.close();
     }
   });
@@ -68,7 +68,7 @@ test("sampling", function (t) {
         //
         // Send a sample
         //
-        connection.gauge("spl.foo", 500, SAMPLE);
+        connection.gauge('spl.foo', 500, SAMPLE);
         process.nextTick(iterate);
       }, Math.ceil(Math.random() * 10));
     })();
@@ -76,7 +76,7 @@ test("sampling", function (t) {
 
   runAll(coll, function() {
     if (finished) {
-      t.ok(true, "Reached " + DESIRED + " on " + TOTAL + " packets.");
+      t.ok(true, 'Reached ' + DESIRED + ' on ' + TOTAL + ' packets.');
       t.end();
       return;
     }
@@ -84,8 +84,8 @@ test("sampling", function (t) {
     // If we reached the end and this has not closed by having
     // the desired amount of requests
     //
-    t.ok(false, "Didnt reach the desired amount of packets " + DESIRED +
-      "/" + TOTAL + " was -> " + count);
+    t.ok(false, 'Didnt reach the desired amount of packets ' + DESIRED +
+      '/' + TOTAL + ' was -> ' + count);
     server.close();
     t.end();
   });

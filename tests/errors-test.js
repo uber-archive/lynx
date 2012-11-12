@@ -2,18 +2,18 @@ var macros     = require('./macros')
   , lynx       = macros.lynx
   , port       = macros.udpServerPort
   , test       = macros.test
-  , fixture    = require("./fixtures/errors.json")
+  , fixture    = require('./fixtures/errors.json')
   ;
 
 test('errors', function (t) {
-  function onError(actual) {
+  function on_error(actual) {
     var expected = fixture.shift();
     //
     // Should return the function that invoked this and the arguments
     // for inspection
     //
-    t.ok(actual.f, "should have a reference to the function");
-    t.ok(actual.args, "args should be supplied");
+    t.ok(actual.f, 'should have a reference to the function');
+    t.ok(actual.args, 'args should be supplied');
 
     //
     // Message should match fixture
@@ -34,7 +34,7 @@ test('errors', function (t) {
   //
   // Wrong host
   //
-  var connection = new lynx('locahost', port, {onError: onError});
+  var connection = new lynx('locahost', port, {on_error: on_error});
 
   connection.count(1);
   connection.count('foo', NaN);

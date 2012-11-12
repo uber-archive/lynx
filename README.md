@@ -6,6 +6,7 @@ A minimalistic node.js client for [statsd] server. Fork of original work by [siv
 
 * **Minimalistic** — there is only a minimum of abstraction between you and 
   statsd
+* **Streams** — You can stream in and out of a `lynx` connection
 * **Re-usable UDP Connections** — Keeps UDP connections open for a certain time
 * **Errors** — Pluggable error handling, by default errors are ignored
 

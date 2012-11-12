@@ -38,6 +38,19 @@ The protocol is super simple, so feel free to check out the source code to under
 
 ## Advanced
 
+### Streams
+
+You can stream to `lynx`:
+
+``` js
+createDelayedStream()
+  .pipe(new lynx('localhost', port))
+  .pipe(createTestStream(t))
+  ;
+```
+
+Feel free to check the `stream-test` for more info.
+
 ### Timers
 
 If you wish to measure timing you can use the `timer()` functionality.

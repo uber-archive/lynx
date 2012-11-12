@@ -24,6 +24,16 @@ macros.matchFixturesTest('timings', function runTest(connection) {
     // Stop the timer
     //
     timer.stop();
+
+    //
+    // Atempt to stop already stopped timer
+    // Will console.log `Can't stop a timer twice`
+    //
+    // We are not testing for this, cause its just an error message
+    // but this would be raised on scenarios where a more strict error handler
+    // is enforced by the user
+    //
+    second_timer.stop();
   }, 200);
 
   //

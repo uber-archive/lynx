@@ -1,6 +1,6 @@
 { "name"        : "lynx"
 , "description" : "Minimalistic StatsD client for Node.js programs"
-, "version"     : "0.0.7"
+, "version"     : "0.0.8"
 , "author"      : "Lloyd Hilaiel"
 , "contributors": [ "Nuno Job <nunojobpinto@gmail.com> (http://nunojob.com)" ]
 , "scripts"     : { "test": "tap tests/*-test.js" }
@@ -22,7 +22,7 @@
   , "graphite"
   ]
 , "devDependencies": { "tap"      : "~0.3.2" }
-, "dependencies"   : { "mersenne" : "~0.0.3", "statsd-parser": "~0.0.0" }
+, "dependencies"   : { "mersenne" : "~0.0.3", "statsd-parser": "~0.0.4" }
 , "licenses"    :
   [ { "type"    : "MIT"
     , "url"     : "http://github.com/dscape/lynx/raw/master/LICENSE"

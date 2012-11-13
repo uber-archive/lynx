@@ -1,4 +1,5 @@
 var macros     = require('./macros')
+  , statsd     = require('statsd-parser')
   , lynx       = macros.lynx
   , test       = macros.test
   , udpServer  = macros.udpServer
@@ -27,6 +28,11 @@ for(i=0; i<TOTAL; i++) {
 }
 
 //
+// Remove console.log from errors, plenty of nothing to send here
+//
+connection.on_error = function () {};
+
+//
 // We are going to do one thousand `TOTAL` packets
 // and see if we hit our minimums
 //
@@ -43,6 +49,14 @@ for(i=0; i<TOTAL; i++) {
 test('sampling', function (t) {
   var server = udpServer(function (message, remote) {
     count++;
+
+    //
+    // Add, check if its a valid statsd message and includes sample rate
+    // that is teh same as being tested
+    //
+    var match = statsd.matchStatsd(message.toString());
+    t.ok(match, message.toString());
+    t.equal(SAMPLE.toString(), match.sample_rate);
 
     //
     // When we finally hit our lower threshold

@@ -255,6 +255,11 @@ macros.matchFixturesTest = function genericTest(resource, f) {
     //
     // Run our client code
     //
+    if(resource === 'scopes') {
+      macros.connection.close();
+      macros.connection = new lynx('localhost', macros.udpServerPort, {
+        scope: 'scope' });
+    }
     f(macros.connection);
   });
 };

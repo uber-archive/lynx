@@ -16,6 +16,14 @@ A minimalistic node.js client for [statsd] server. Fork of original work by [siv
 $ npm install lynx
 $ node
 > var lynx = require('lynx');
+//
+// Options in this instantiation include:
+//   * `on_error` function to be executed when we have errors
+//   * `socket` if you wish to just use a existing udp socket
+//   * `scope` to define the a prefix for all stats, e.g. with `scope`
+//     'product1' and stat 'somestat' the key would actually be
+//     'product1.somestat'
+//
 > var metrics = new lynx('localhost', 8125);
 { host: 'localhost', port: 8125 }
 > metrics.increment('node_test.int');

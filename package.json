@@ -2,7 +2,10 @@
 , "description" : "Minimalistic StatsD client for Node.js programs"
 , "version"     : "0.0.11"
 , "author"      : "Lloyd Hilaiel"
-, "contributors": [ "Nuno Job <nunojobpinto@gmail.com> (http://nunojob.com)" ]
+, "contributors":
+  [ "Nuno Job <nunojobpinto@gmail.com> (http://nunojob.com)"
+  , "Mark Bogdanoff (https://github.com/bog)"
+  ]
 , "scripts"     : { "test": "tap tests/*-test.js" }
 , "repository"  :
   { "type"      : "git"

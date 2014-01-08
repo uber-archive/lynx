@@ -47,6 +47,25 @@ The protocol is super simple, so feel free to check out the source code to under
 
 ## Advanced
 
+### Sampling
+
+If you want to track something that happens really, really frequently, it can overwhelm StatsD with UDP packets.  To work around that, use the optional sampling rate for metrics.  This will only send packets a certain percentage of time.  For very frequent events, this will give you a statistically accurate representation of your data.
+
+Sample rate is an optional parameter to all of the metric API calls.  A valid sample rate is 0.0 - 1.0.  Values of 0.0 will never send any packets, and values of 1.0 will send every packet.  
+
+In these examples we are samping at a rate of 0.1, meaning 1-in-10 calls to send a sample will actually be sent to StatsD.
+
+```
+var metrics = new lynx('localhost', 8125);
+metrics.increment('node_test.int', 0.1);
+metrics.decrement('node_test.int', 0.1);
+metrics.timing('node_test.some_service.task.time', 500, 0.1);
+metrics.gauge('gauge.one', 100, 0.1);
+metrics.set('set.one', 10, 0.1);
+var timer2 = metrics.createTimer('node_test.some_service.task2.time', 0.1);
+timer2.stop();
+```
+
 ### Streams
 
 You can stream to `lynx`:

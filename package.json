@@ -1,34 +1,47 @@
-{ "name"        : "lynx"
-, "description" : "Minimalistic StatsD client for Node.js programs"
-, "version"     : "0.0.11"
-, "author"      : "Lloyd Hilaiel"
-, "contributors":
-  [ "Nuno Job <nunojobpinto@gmail.com> (http://nunojob.com)"
-  , "Mark Bogdanoff (https://github.com/bog)"
-  ]
-, "scripts"     : { "test": "tap tests/*-test.js" }
-, "repository"  :
-  { "type"      : "git"
-  , "url"       : "git://github.com/dscape/lynx.git"
-  }
-, "bugs"        : { "web" : "https://github.com/dscape/lynx/issues" }
-, "directories" : { "lib" : "./lib/" }
-, "main"        : "./lib/lynx"
-, "keywords"    :
-  [ "stats"
-  , "metrics"
-  , "metricsd"
-  , "statsd"
-  , "etsy"
-  , "statsd client"
-  , "statsd driver"
-  , "graphite"
-  ]
-, "devDependencies": { "tap"      : "~0.3.2" }
-, "dependencies"   : { "mersenne" : "~0.0.3", "statsd-parser": "~0.0.4" }
-, "licenses"    :
-  [ { "type"    : "MIT"
-    , "url"     : "http://github.com/dscape/lynx/raw/master/LICENSE"
+{
+  "name": "lynx",
+  "description": "Minimalistic StatsD client for Node.js programs",
+  "version": "0.1.0",
+  "author": "Lloyd Hilaiel",
+  "contributors": [
+    "Nuno Job <nunojobpinto@gmail.com> (http://nunojob.com)",
+    "Mark Bogdanoff (https://github.com/bog)"
+  ],
+  "scripts": {
+    "test": "tap tests/*-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dscape/lynx.git"
+  },
+  "bugs": {
+    "web": "https://github.com/dscape/lynx/issues"
+  },
+  "directories": {
+    "lib": "./lib/"
+  },
+  "main": "./lib/lynx",
+  "keywords": [
+    "stats",
+    "metrics",
+    "metricsd",
+    "statsd",
+    "etsy",
+    "statsd client",
+    "statsd driver",
+    "graphite"
+  ],
+  "devDependencies": {
+    "tap": "~0.3.2"
+  },
+  "dependencies": {
+    "mersenne": "~0.0.3",
+    "statsd-parser": "~0.0.4"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/dscape/lynx/raw/master/LICENSE"
     }
   ]
 }

@@ -1,5 +1,7 @@
 # lynx
 
+![NPM Downloads](http://img.shields.io/npm/dm/lynx.svg?style=flat) ![NPM Version](http://img.shields.io/npm/v/lynx.svg?style=flat)
+
 A minimalistic node.js client for [statsd] server. Fork of original work by [sivy]
 
 `lynx` features:

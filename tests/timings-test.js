@@ -56,6 +56,9 @@ macros.matchFixturesTest('timings', function runTest(connection) {
     // but this would be raised on scenarios where a more strict error handler
     // is enforced by the user
     //
+    connection.on('error', function (err) {
+
+    });
     second_timer.stop();
   }, 150);
 });
